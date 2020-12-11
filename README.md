@@ -1,2 +1,2 @@
 # Word on Fire Core
-A set of shared libraires and functionality for all Word on Fire WordPress Sites.
+A collection of libraries, tools, and shared functionality across WOF WordPress sites.

@@ -10,7 +10,7 @@
  * @wordpress-plugin
  * Plugin Name:       Word on Fire Core
  * Plugin URI:        https://github.com/Word-on-Fire-Catholic-Ministries/wof-core
- * Description:       A set of shared libraries and functionality for all Word on Fire WordPress Sites.
+ * Description:       A collection of libraries, tools, and shared functionality across WOF WordPress sites.
  * Version:           1.0.0
  * Requires at least: 5.5
  * Requires PHP:      7.4
@@ -19,3 +19,11 @@
  * Text Domain:       wof-core
  * License:           None
  */
+
+namespace WOF;
+
+require_once __DIR__ . '/vendor/autoload.php';
+
+global $algolia;
+
+$algolia = \Algolia\AlgoliaSearch\SearchClient::create(ALGOLIA_APP_ID, ALGOLIA_API_KEY);

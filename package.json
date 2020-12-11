@@ -1,7 +1,7 @@
 {
   "name": "wof-core",
   "version": "1.0.0",
-  "description": "Shared code accross all WOF sites.",
+  "description": "Shared code across all WOF sites.",
   "main": "index.js",
   "scripts": {
     "watch": "concurrently \"npm run watch:css-js\" \"npm run sync:css\" \"npm run watch:php\"",
