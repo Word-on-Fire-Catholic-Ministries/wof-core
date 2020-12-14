@@ -7,16 +7,13 @@ use Algolia\AlgoliaSearch\Exceptions\MissingObjectId;
 
 defined( 'ABSPATH' ) || exit;
 
-if (!(defined('WP_CLI') && WP_CLI)) {
-	return;
-}
-
-
 class AlgoliaCommand {
 
-	public function  reindex_post($args, $assoc_args) {
+	public function  reindex($args, $assoc_args) {
 		global $algolia;
-		$index = $algolia->initIndex('dev_WOF');
+		$index = $algolia->initIndex(ALGOLIA_INDEX_CONTENT);
+
+		$index->clearObjects()->wait();
 
 		$paged = 1;
 		$count = 0;
@@ -63,7 +60,7 @@ class AlgoliaCommand {
 
 		} while (true);
 
-		WP_CLI::success("$count posts indexed in Algolia");
+		\WP_CLI::success("$count posts indexed in Algolia");
 	}
 
 }

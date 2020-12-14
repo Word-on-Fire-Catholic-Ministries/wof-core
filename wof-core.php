@@ -13,7 +13,7 @@
  * Description:       A collection of libraries, tools, and shared functionality across WOF WordPress sites.
  * Version:           1.0.0
  * Requires at least: 5.5
- * Requires PHP:      7.4
+ * Requires PHP:      7.3
  * Author:            Sean Davis
  * Author URI:        https://github.com/Word-on-Fire-Catholic-Ministries/
  * Text Domain:       wof-core

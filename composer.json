@@ -13,7 +13,7 @@
     "psr-4": { "WOF\\": "src/" }
   },
   "require": {
-    "php": "^7.4.0",
+    "php": "^7.4",
     "algolia/algoliasearch-client-php": "^2.7"
   },
   "require-dev": {
