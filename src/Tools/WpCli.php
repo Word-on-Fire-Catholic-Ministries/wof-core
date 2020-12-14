@@ -16,7 +16,7 @@ class WpCli {
 			return;
 		}
 
-		\WP_CLI::add_command('algolia', '\WOF\Search\AlgoliaCommand');
+		\WP_CLI::add_command('algolia', '\WOF\Search\Algolia\AlgoliaCommand');
 	}
 
 }

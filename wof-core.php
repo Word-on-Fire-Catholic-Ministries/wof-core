@@ -22,6 +22,7 @@
 
 namespace WOF;
 
+use Algolia\AlgoliaSearch\SearchClient;
 use WOF\Tools\WpCli;
 
 defined( 'ABSPATH' ) || exit;
@@ -30,7 +31,7 @@ require_once __DIR__ . '/vendor/autoload.php';
 
 global $algolia;
 
-$algolia = \Algolia\AlgoliaSearch\SearchClient::create(ALGOLIA_APP_ID, ALGOLIA_API_KEY);
+$algolia = SearchClient::create(ALGOLIA_APP_ID, ALGOLIA_API_KEY);
 
 $wp_cli = new WpCli();
 $wp_cli->init();

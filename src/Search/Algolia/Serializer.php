@@ -9,6 +9,7 @@ class Serializer {
 	private array $mappings;
 
 	public function __construct($serializerMapping) {
+
 	}
 
 }
