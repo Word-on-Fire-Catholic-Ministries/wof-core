@@ -7,16 +7,25 @@ defined( 'ABSPATH' ) || exit;
 
 class WpCli {
 
-	public function init () {
-		add_action('cli_init', array( $this, 'registerCommands' ));
+	private $commandRegistry;
+
+	public function __construct() {
+		$this->commandRegistry = array();
+		add_action('cli_init', array( $this, 'on_cli_init' ));
 	}
 
-	public function registerCommands () {
+	public function on_cli_init () {
 		if (!(defined('WP_CLI') && WP_CLI)) {
 			return;
 		}
 
-		\WP_CLI::add_command('algolia', '\WOF\Search\Algolia\AlgoliaCommand');
+		foreach ($this->commandRegistry as $command) {
+			\WP_CLI::add_command($command['command'], $command['path']);
+		}
+	}
+
+	public function registerCommand ($command, $path) {
+		$this->commandRegistry[] = array('command' => $command, 'path' => $path);
 	}
 
 }
