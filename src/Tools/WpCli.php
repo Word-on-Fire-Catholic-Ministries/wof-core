@@ -25,7 +25,7 @@ class WpCli {
 	}
 
 	public function registerCommand ($command, $path) {
-		$this->commandRegistry[] = array('command' => $command, 'path' => $path);
+		$this->commandRegistry[$command] = $path;
 	}
 
 }

@@ -1,7 +1,7 @@
 <?php
 
 
-namespace WOF\Search\Algolia;
+namespace WOF\Search;
 
 defined( 'ABSPATH' ) || exit;
 
