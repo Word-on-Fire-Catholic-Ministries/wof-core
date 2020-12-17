@@ -4,63 +4,28 @@
 namespace WOF\Search;
 
 use Algolia\AlgoliaSearch\Exceptions\MissingObjectId;
+use WP_CLI;
 
 defined( 'ABSPATH' ) || exit;
 
 class AlgoliaCommand {
 
-	public function  reindex($args, $assoc_args) {
-		global $algolia;
-		$index = $algolia->initIndex(ALGOLIA_INDEX_CONTENT);
+	public function reindex($args, $assoc_args) {
 
-		$index->clearObjects()->wait();
+		if (!isset($args[0]) || !Indices::isIndex($args[0])) {
+			WP_CLI::error('First argument must be the index type.');
+			return;
+		}
 
-		$paged = 1;
-		$count = 0;
+		$index = Indices::getIndex($args[0]);
 
-		do {
-			$posts = new \WP_Query([
-				'posts_per_page' => 100,
-				'paged' => $paged,
-				'post_type' => 'post'
+		try {
+			$index->indexAll();
+		} catch ( MissingObjectId $e ) {
+			WP_CLI::error('Missing Object ID.', false);
+		}
 
-			]);
-
-			if (!$posts->have_posts()) {
-				break;
-			}
-
-			$records = [];
-
-			foreach ($posts->posts as $post) {
-				if ($assoc_args['verbose']) {
-					\WP_CLI::line('Serializing ['.$post->post_title.']');
-				}
-				$record = (array) apply_filters('post_to_record', $post);
-
-				if (!isset($record['objectID'])) {
-					$record['objectID'] = implode('#', [$post->post_type, $post->ID]);
-				}
-
-				$records[] = $record;
-				$count++;
-			}
-
-			if ($assoc_args['verbose']) {
-				\WP_CLI::line('Sending batch');
-			}
-
-			try {
-				$index->saveObjects( $records );
-			} catch ( MissingObjectId $e ) {
-
-			}
-
-			$paged++;
-
-		} while (true);
-
-		\WP_CLI::success("$count posts indexed in Algolia");
+		WP_CLI::success("Posts indexed in Algolia");
 	}
 
 }
