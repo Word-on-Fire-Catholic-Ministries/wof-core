@@ -78,7 +78,7 @@ class Index {
 			return $post;
 		}
 
-		$this->indexers[$post->post_type]->indexSingle($this, $post);
+		$this->indexers[$post->post_type]->indexSingle($this->getAlgoliaIndex(), $post);
 
 		return $post;
 	}
