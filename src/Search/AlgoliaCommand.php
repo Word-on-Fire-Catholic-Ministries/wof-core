@@ -10,22 +10,29 @@ defined( 'ABSPATH' ) || exit;
 
 class AlgoliaCommand {
 
+	private $indices;
+
+	public function __construct(Indices $indices) {
+		$this->indices = $indices;
+	}
+
 	public function reindex($args, $assoc_args) {
 
-		if (!isset($args[0]) || !Indices::isIndex($args[0])) {
+		if (!isset($args[0]) || !$this->indices->isIndex($args[0])) {
 			WP_CLI::error('First argument must be the index type.');
 			return;
 		}
 
-		$index = Indices::getIndex($args[0]);
+		$index = $this->indices->getIndex($args[0]);
+		$count = 0;
 
 		try {
-			$index->indexAll();
+			$count = $index->indexAll();
 		} catch ( MissingObjectId $e ) {
 			WP_CLI::error('Missing Object ID.', false);
 		}
 
-		WP_CLI::success("Posts indexed in Algolia");
+		WP_CLI::success($count . " posts indexed in Algolia");
 	}
 
 }

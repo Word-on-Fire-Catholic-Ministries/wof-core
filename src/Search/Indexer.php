@@ -5,6 +5,7 @@ namespace WOF\Search;
 
 
 use Algolia\AlgoliaSearch\SearchIndex;
+use Exception;
 use WP_Post;
 use WP_Query;
 
@@ -15,10 +16,6 @@ abstract class Indexer {
 	protected $postType = 'post';
 	protected $indexType = 'content';
 
-	public function __construct() {
-		add_action('save_post', array($this, 'on_save_post'), 100, 3);
-	}
-
 	public function getPostType () : string {
 		return $this->postType;
 	}
@@ -27,7 +24,11 @@ abstract class Indexer {
 		return $this->indexType;
 	}
 
-	public function indexAll (SearchIndex $index, int $batchSize) {
+	public function setIndexType (string $type) {
+		$this->indexType = $type;
+	}
+
+	public function indexAll (SearchIndex $index, int $batchSize = 100) : int {
 
 		$index->clearObjects()->wait();
 
@@ -35,7 +36,7 @@ abstract class Indexer {
 		$count = 0;
 
 		do {
-			$posts = new \WP_Query([
+			$posts = new WP_Query([
 				'posts_per_page' => $batchSize,
 				'paged' => $paged,
 				'post_type' => $this->postType
@@ -60,6 +61,7 @@ abstract class Indexer {
 
 		} while (true);
 
+		return $count;
 	}
 
 	public function indexSingle (SearchIndex $index, WP_Post $post) {
@@ -74,6 +76,9 @@ abstract class Indexer {
 	}
 
 	public function serializePost ( WP_Post $post) : array {
+		if ($post->post_type !== $this->getPostType()) {
+			throw new Exception('Attempting to serialize wrong post type');
+		}
 
 		return [
 			'objectID' => implode('#', [$post->post_type, $post->ID]),
@@ -88,17 +93,4 @@ abstract class Indexer {
 			'url' => get_post_permalink($post->ID)
 		];
 	}
-
-	public function on_save_post ($id, WP_Post $post, $update) {
-		if (wp_is_post_revision($id) || wp_is_post_autosave($id)) {
-			return $post;
-		}
-
-		$index = Indices::getIndex($this->getIndexType())->getAlgoliaIndex();
-
-		$this->indexSingle($index, $post);
-
-		return $post;
-	}
-
 }

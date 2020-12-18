@@ -10,7 +10,7 @@ class Environment {
 
 	public function setEnv ($assetVersion) {
 
-		switch ( wp_get_environment_type() ) {
+		switch ( WOF_ENVIRONMENT ) {
 			case 'local':
 			case 'development':
 				$this->setDevelopmentEnv();

@@ -8,45 +8,42 @@ use Exception;
 
 class Indices {
 
-	protected static $client;
+	protected $client;
 
-	protected static $indices = array();
+	protected $indices;
 
-	private static $appId;
+	private $appId;
 
-	private static $algoliaApiKey;
+	private $algoliaApiKey;
 
-	public static function init (string $appId, string $algoliaApiKey) {
-		self::$appId = $appId;
-		self::$algoliaApiKey = $algoliaApiKey;
+	public function __construct (string $appId, string $algoliaApiKey) {
+		$this->indices = array();
+		$this->appId = $appId;
+		$this->algoliaApiKey = $algoliaApiKey;
 	}
 
-	public static function getClient () : SearchClient {
-		if (!isset(self::$appId) || !isset(self::$algoliaApiKey)) {
-			throw new Exception('Need Algolia API credentials to instantiate client');
+	public function getClient () : SearchClient {
+		if (!isset($this->client)) {
+			$this->client = SearchClient::create($this->appId, $this->algoliaApiKey);
 		}
-
-		if (!isset(self::$client)) {
-			SearchClient::create(self::$appId, self::$algoliaApiKey);
-		}
-
-		return self::$client;
+		return $this->client;
 	}
 
-	public static function getIndex (string $indexType) : Index {
-		return self::$indices[$indexType];
+	public function getIndex (string $indexType) : Index {
+		return $this->indices[$indexType];
 	}
 
-	public static function isIndex (string $indexType): bool {
-		return isset(self::$indices[$indexType]);
+	public function isIndex (string $indexType): bool {
+		return isset($this->indices[$indexType]);
 	}
 
-	public static function addIndex (Index $index) {
-		self::$indices[$index->getType()] = $index;
+	public function addIndex (Index $index) {
+
+		$this->indices[$index->getType()] = $index;
 	}
 
-	public static function getIndices () : array {
-		return self::$indices;
+	public function getIndices () : array {
+		return $this->indices;
 	}
 
 }

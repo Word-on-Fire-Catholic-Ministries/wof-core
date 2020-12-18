@@ -3,7 +3,6 @@
 
 namespace WOF\Search;
 
-use Algolia\AlgoliaSearch\SearchIndex;
 use WP_Post;
 use WP_Term;
 
@@ -11,10 +10,8 @@ defined( 'ABSPATH' ) || exit;
 
 class PostIndexer extends Indexer {
 
-	public function __construct(string $indexType) {
+	public function __construct() {
 		$this->postType = 'post';
-		$this->indexType = $indexType;
-		parent::__construct();
 	}
 
 	public function serializePost( WP_Post $post ): array {
@@ -24,7 +21,8 @@ class PostIndexer extends Indexer {
 			return $term->name;
 		}, wp_get_post_terms($post->ID, 'post_tag'));
 
-		$serialized['categories'] = wp_get_post_categories($post->ID);
+		$serialized['categories'] = wp_get_post_categories(
+			$post->ID, array('fields' => 'names'));
 
 		return $serialized;
 	}

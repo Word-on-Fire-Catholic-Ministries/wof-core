@@ -3,6 +3,8 @@
 
 namespace WOF\Tools;
 
+use WP_CLI;
+
 defined( 'ABSPATH' ) || exit;
 
 class WpCli {
@@ -11,16 +13,15 @@ class WpCli {
 
 	public function __construct() {
 		$this->commandRegistry = array();
-		add_action('cli_init', array( $this, 'on_cli_init' ));
 	}
 
-	public function on_cli_init () {
+	public function addCommands () {
 		if (!(defined('WP_CLI') && WP_CLI)) {
 			return;
 		}
 
-		foreach ($this->commandRegistry as $command) {
-			\WP_CLI::add_command($command['command'], $command['path']);
+		foreach ($this->commandRegistry as $key => $value) {
+			WP_CLI::add_command($key, $value);
 		}
 	}
 
