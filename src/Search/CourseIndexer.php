@@ -25,8 +25,19 @@ class CourseIndexer extends Indexer {
 		$serialized['categories'] = wp_get_post_categories(
 			$post->ID, array('fields' => 'names'));
 
-		$serialized['lessons'] = learndash_get_course_steps($post->ID);
+		$serialized['lessons'] = $this->getLessonNames($post->ID);
 
 		return $serialized;
+	}
+
+	private function getLessonNames (int $postId) : array {
+		$lessonIds = learndash_get_course_steps($postId);
+		$lessonNames = array();
+
+		foreach ($lessonIds as $id) {
+			$lessonNames[] = get_the_title($id);
+		}
+
+		return $lessonNames;
 	}
 }
