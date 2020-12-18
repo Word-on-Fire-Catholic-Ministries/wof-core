@@ -35,6 +35,19 @@ class AlgoliaCommand {
 		WP_CLI::success($count . " posts indexed in Algolia");
 	}
 
+	public function clear($args, $assoc_args) {
+		if (!isset($args[0]) || !$this->indices->isIndex($args[0])) {
+			WP_CLI::error('First argument must be the index type.');
+			return;
+		}
+
+		$index = $this->indices->getIndex($args[0]);
+
+		$index->getAlgoliaIndex()->clearObjects()->wait();
+
+		WP_CLI::success($args[0] . " index cleared in Algolia");
+	}
+
 }
 
 

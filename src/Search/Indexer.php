@@ -15,6 +15,7 @@ abstract class Indexer {
 
 	protected $postType = 'post';
 	protected $indexType = 'content';
+	protected $idPrefix = 'nil';
 
 	public function getPostType () : string {
 		return $this->postType;
@@ -28,9 +29,11 @@ abstract class Indexer {
 		$this->indexType = $type;
 	}
 
-	public function indexAll (SearchIndex $index, int $batchSize = 100) : int {
+	public function setIdPrefix (string $prefix) {
+		$this->idPrefix = $prefix;
+	}
 
-		$index->clearObjects()->wait();
+	public function indexAll (SearchIndex $index, int $batchSize = 100) : int {
 
 		$paged = 1;
 		$count = 0;
@@ -81,7 +84,7 @@ abstract class Indexer {
 		}
 
 		return [
-			'objectID' => implode('#', [$post->post_type, $post->ID]),
+			'objectID' => "{$this->idPrefix}_{$post->post_type}#{$post->ID}",
 			'title' => $post->post_title,
 			'published' => $post->post_date,
 			'author' => [
