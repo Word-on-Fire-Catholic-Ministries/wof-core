@@ -26,4 +26,4 @@ defined( 'ABSPATH' ) || exit;
 
 
 define('WOF_CORE_DIR', __DIR__);
-require_once WOF_CORE_DIR . '/vendor/autoload.php';
+require_once( WOF_SITE_ROOT . '/vendor/autoload.php');

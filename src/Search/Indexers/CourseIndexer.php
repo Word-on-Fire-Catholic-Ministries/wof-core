@@ -1,9 +1,10 @@
 <?php
 
 
-namespace WOF\Search;
+namespace WOF\Search\Indexers;
 
 
+use WOF\Search\Indexer;
 use WP_Post;
 use WP_Term;
 

@@ -70,8 +70,10 @@ abstract class Indexer {
 	public function indexSingle (SearchIndex $index, WP_Post $post) {
 		$record = $this->serializePost($post);
 
+		$no_index = get_field('do_not_index', $post->ID);
+
 		// Remove from index if this update trashes the post
-		if ($post->post_status === 'trash') {
+		if ($post->post_status !== 'publish' || $no_index === true) {
 			$index->deleteObject($record['objectID']);
 		} else {
 			$index->saveObject($record);
@@ -90,10 +92,11 @@ abstract class Indexer {
 			'author' => [
 				'id' => $post->post_author,
 				'name' => get_user_by('ID', $post->post_author)->display_name,
+				'url' => esc_url( get_author_posts_url( $post->post_author ) )
 			],
 			'excerpt' => $post->post_excerpt,
 			'content' => strip_tags($post->post_content),
-			'url' => get_post_permalink($post->ID)
+			'url' => esc_url( get_post_permalink($post->ID) )
 		];
 	}
 }

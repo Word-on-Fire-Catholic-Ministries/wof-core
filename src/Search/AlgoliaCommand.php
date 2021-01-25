@@ -16,7 +16,7 @@ class AlgoliaCommand {
 		$this->indices = $indices;
 	}
 
-	public function reindex($args, $assoc_args) {
+	public function index($args, $assoc_args) {
 
 		if (!isset($args[0]) || !$this->indices->isIndex($args[0])) {
 			WP_CLI::error('First argument must be the index type.');
