@@ -94,9 +94,9 @@ abstract class Indexer {
 				'name' => get_user_by('ID', $post->post_author)->display_name,
 				'url' => esc_url( get_author_posts_url( $post->post_author ) )
 			],
-			'excerpt' => $post->post_excerpt,
-			'content' => strip_tags($post->post_content),
-			'url' => esc_url( get_post_permalink($post->ID) )
+			'excerpt' => wp_strip_all_tags( get_the_excerpt($post->ID) ),
+			'content' => wp_strip_all_tags($post->post_content),
+			'url' => esc_url( get_permalink($post->ID) )
 		];
 	}
 }
