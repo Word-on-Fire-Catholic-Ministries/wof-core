@@ -89,7 +89,7 @@ abstract class Indexer {
 			'objectID' => "{$this->idPrefix}_{$post->post_type}#{$post->ID}",
 			'title' => $post->post_title,
 			'published' => $post->post_date,
-			'site' => WOF_SITE,
+			'site' => $this->idPrefix,
 			'author' => [
 				'id' => $post->post_author,
 				'name' => get_user_by('ID', $post->post_author)->display_name,
