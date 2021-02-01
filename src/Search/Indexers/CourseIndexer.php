@@ -28,6 +28,10 @@ class CourseIndexer extends Indexer {
 
 		$serialized['lessons'] = $this->getLessonNames($post->ID);
 
+		if (has_post_thumbnail($post)) {
+			$serialized['thumbnail'] = get_the_post_thumbnail_url($post);
+		}
+
 		return $serialized;
 	}
 
