@@ -1,6 +1,7 @@
 {
     "name": "word-on-fire/wof-core",
     "description": "A collection of libraries, tools, and shared functionality across WOF WordPress sites",
+    "version": "1.0.0",
     "type": "library",
     "license": "MIT",
     "authors": [
@@ -15,5 +16,6 @@
     },
     "require": {
         "algolia/algoliasearch-client-php": "^2.7"
-    }
+    },
+
 }
