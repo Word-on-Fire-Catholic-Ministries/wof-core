@@ -1,0 +1,19 @@
+{
+    "name": "word-on-fire/wof-core",
+    "description": "A collection of libraries, tools, and shared functionality across WOF WordPress sites",
+    "type": "library",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Sean Davis",
+            "email": "sean.davis@wordonfire.org"
+        }
+    ],
+    "minimum-stability": "stable",
+    "autoload": {
+        "psr-4": {"WOF": "src"}
+    },
+    "require": {
+        "algolia/algoliasearch-client-php": "^2.7"
+    }
+}
