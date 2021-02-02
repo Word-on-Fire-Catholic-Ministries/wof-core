@@ -17,5 +17,4 @@
     "require": {
         "algolia/algoliasearch-client-php": "^2.7"
     }
-
 }
