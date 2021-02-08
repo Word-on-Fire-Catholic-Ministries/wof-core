@@ -3,6 +3,7 @@
 
 namespace WOF\Core\Exceptions;
 
+defined( 'ABSPATH' ) || exit;
 
 use Exception;
 use WP_Error;
