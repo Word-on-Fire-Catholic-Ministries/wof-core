@@ -6,21 +6,30 @@ defined( 'ABSPATH' ) || exit;
 
 /**
  * A component that can hold routes which route an endpoint to a specific callback function
- * @package WOFI\Plugin\Core
+ * @package WOF\Core
  */
 class Router extends Component {
     /**
      * @var array A collection of stored routes
      */
-    private $routes;
+    private array $routes;
 
-    /**
-     * Create the router component
-     * @param Hooks $hooks The WP hooks dependency
-     */
-    public function __construct(Hooks $hooks) {
+
+	/**
+	 * @var array string array of WP hooks for when to automatically flush the rewrites. Usually when the plugin or theme is deactivated.
+	 */
+	private array $flushRewriteHooks;
+
+	/**
+	 * Create the router component
+	 *
+	 * @param Hooks $hooks The WP hooks dependency
+	 * @param array $flushRewriteHooks Array of strings of WP hooks when flush rewrite should run.
+	 */
+    public function __construct(Hooks $hooks, array $flushRewriteHooks) {
         parent::__construct($hooks);
         $this->routes = array();
+	    $this->flushRewriteHooks = $flushRewriteHooks;
     }
 
     /**
@@ -74,7 +83,7 @@ class Router extends Component {
 
     /**
      * Match any routes to if any of the registered route query vars match and call the callback.
-     * Exits afte rthe callback completes.
+     * Exits after the callback completes.
      */
     public function matchRoutes () {
         foreach ($this->routes as $route) {
@@ -91,10 +100,11 @@ class Router extends Component {
      * @param Hooks $hooks Hooks to register with WP
      */
     protected function defineHooks(Hooks $hooks) {
-        $hooks->add_action(WOFI_PLUGIN_ACTIVATION_HOOK, $this, 'addRewrites');
-        $hooks->add_action(WOFI_PLUGIN_ACTIVATION_HOOK, $this, 'flushRewrites', 10);
-        $hooks->add_action(WOFI_PLUGIN_DEACTIVATION_HOOK, $this, 'flushRewrites');
-        $hooks->add_action(WOFI_PLUGIN_UNINSTALL_HOOK, $this, 'flushRewrites');
+        $hooks->add_action('init', $this, 'addRewrites', 11);
+
+        foreach ($this->flushRewriteHooks as $hook) {
+	        $hooks->add_action($hook, $this, 'flushRewrites', 12);
+        }
 
         $hooks->add_action('init', $this, 'addRewrites');
         $hooks->add_filter('query_vars', $this, 'addQueryVars');
