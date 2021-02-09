@@ -29,14 +29,13 @@ class PostIndexer extends Indexer {
 
 //		$serialized['categories'] = wp_get_post_categories(
 //			$post->ID, array('fields' => 'names'));
-        $serialized = $this->serializeCategoriesForPost($post->ID, $serialized);
+        $post_cats = wp_get_post_categories($post->ID,array('fields' => array('names', 'parents', 'term_ids')));
+        $serialized = $this->serializeCategoriesForPost($post_cats, $serialized);
 
 		return $serialized;
 	}
 
-	private function serializeCategoriesForPost($post_id, $serialized): array{
-
-	    $post_cats = wp_get_post_categories($post_id,array('fields' => array('names', 'parents', 'term_ids')));
+	public function serializeCategoriesForPost($post_cats, $serialized): array{
         $categories = $this->putCategoriesIntoList($post_cats);
         //make a tree of categories
         $this->connect_categories($categories);
