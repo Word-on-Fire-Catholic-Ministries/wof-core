@@ -5,7 +5,7 @@ use WOF\Search\Indexers\PostIndexer;
 
 //require('./wordpress/wp-includes/post.php');
 
-require_once ('../mocks/WP_Term.php');
+include_once (dirname(__FILE__).'/../mocks/WP_Term.php');
 
 class CategoryIndexTesting extends TestCase
 {
