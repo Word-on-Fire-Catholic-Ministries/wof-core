@@ -1,19 +1,23 @@
 <?php
 use PHPUnit\Framework\TestCase;
 use WOF\Search\Indexers\PostIndexer;
+//use WP_Mock\Tools\TestCase;
+
 //require('./wordpress/wp-includes/post.php');
 
-class CategoryIndexTesting extends TestCase{
-    public function testIsraelChosenArticle(){
-        $post_num = 109;
-        $post = get_post($post_num);
-        $post = WP_Post::get_instance($post_num);
+require_once ('../mocks/WP_Term.php');
 
-        $indexer = new PostIndexer();
-        $serialized = $indexer->serializePost($post);
-        $this->assertEquals($serialized['categories.lv10'], 'Watch');
-        $this->assertEquals($serialized['categories.lv11'], 'Shows');
-        $this->assertEquals($serialized['categories.lv12'], "Bishop Barron's Sermons");
-    }
+class CategoryIndexTesting extends TestCase
+{
+	public function testIsraelChosenArticle()
+	{
+		$categories = WP_Term::make_array(WP_Term::test_data());
+
+		$pi = new PostIndexer();
+		$serialized = $pi->serialize_categories($categories);
+		$this->assertEquals( 'watch', $serialized['categories.lv10'] );
+		$this->assertEquals( 'shows', $serialized['categories.lv11'] );
+		$this->assertEquals( "word on fire show, sermons", $serialized['categories.lv12'] );
+	}
 }
 
