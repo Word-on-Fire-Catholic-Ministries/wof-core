@@ -82,7 +82,7 @@ class PostIndexer extends Indexer {
      * given a list of categories associated with a post
      */
     private function getDepthArray($categories): array{
-	    $depths = array(); // depth => "name, name, name"
+	    $depths = array(); // [depth (int) => "cat, cat, cat"]
 	    foreach($categories as $cat){
 	        if(isset($depths[$cat->get_depth()])){
 	            $depths[$cat->get_depth()] = $depths[$cat->get_depth()].', '.$cat->get_name();
