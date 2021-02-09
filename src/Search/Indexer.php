@@ -6,8 +6,10 @@ namespace WOF\Search;
 
 use Algolia\AlgoliaSearch\SearchIndex;
 use Exception;
+use WOF\Taxonomy\CategoryTree;
 use WP_Post;
 use WP_Query;
+use WP_Term;
 
 defined( 'ABSPATH' ) || exit;
 
@@ -101,7 +103,19 @@ abstract class Indexer {
 		];
 	}
 
-	private function serializeTerm(){
+	public function serialize_categories( array $terms ) : array {
+		$cats = new CategoryTree($terms);
+		$json = array();
 
+		foreach($cats->get_depth_array() as $depth => $cats){
+			$json['categories.lv'.strval($depth)] = $cats;
+		}
+		return $json;
+    }
+
+    public function serialize_tags ( array $terms ): array {
+	    return array_map(function (WP_Term $term) {
+		    return $term->name;
+	    }, $terms);
     }
 }

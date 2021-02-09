@@ -16,7 +16,6 @@
   <testsuites>
     <testsuite name="WOF Core Tests">
       <directory>./test/php-tests</directory>
-      <file>./test/php-tests/CategoryIndexTesting.php</file>
     </testsuite>
   </testsuites>
   <logging/>

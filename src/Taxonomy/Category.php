@@ -1,5 +1,5 @@
 <?php
-namespace WOF\Search;
+namespace WOF\Taxonomy;
 use WP_Term;
 
 /*
