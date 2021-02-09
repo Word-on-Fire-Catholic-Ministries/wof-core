@@ -5,7 +5,10 @@ use WOF\Search\Indexers\PostIndexer;
 
 class CategoryIndexTesting extends TestCase{
     public function testIsraelChosenArticle(){
-        $post = get_post(109);
+        $post_num = 109;
+        $post = get_post($post_num);
+        $post = WP_Post::get_instance($post_num);
+        var_dump($post);
         $pi = new PostIndexer();
         $serialized = $pi->serializePost($post);
         $this->assertEquals($serialized['categories.lv10'], 'Watch');
