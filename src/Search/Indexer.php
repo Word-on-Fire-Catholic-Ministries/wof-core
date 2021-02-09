@@ -100,4 +100,8 @@ abstract class Indexer {
 			'url' => esc_url( get_permalink($post->ID) )
 		];
 	}
+
+	private function serializeTerm(){
+
+    }
 }
