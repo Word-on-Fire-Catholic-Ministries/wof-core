@@ -1,1 +1,1 @@
-C:37:"PHPUnit\Runner\DefaultTestResultCache":162:{a:2:{s:7:"defects";a:1:{s:45:"CategoryIndexTesting::testIsraelChosenArticle";i:4;}s:5:"times";a:1:{s:45:"CategoryIndexTesting::testIsraelChosenArticle";d:0.001;}}}
+C:37:"PHPUnit\Runner\DefaultTestResultCache":274:{a:2:{s:7:"defects";a:2:{s:45:"CategoryIndexTesting::testIsraelChosenArticle";i:4;s:42:"CategoryIndexTest::testIsraelChosenArticle";i:4;}s:5:"times";a:2:{s:45:"CategoryIndexTesting::testIsraelChosenArticle";d:0.001;s:42:"CategoryIndexTest::testIsraelChosenArticle";d:0.001;}}}
