@@ -16,6 +16,7 @@ dist/
 node_modules/
 vendor/
 wordpress-develop/
+wordpress/
 
 # Optional npm cache directory
 .npm

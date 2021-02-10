@@ -1,4 +1,0 @@
-@function rem ($size) {
-  $result: ($size / 16) *1rem;
-  @return $result;
-}
