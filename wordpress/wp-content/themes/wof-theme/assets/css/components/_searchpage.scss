@@ -1,0 +1,209 @@
+@use "../abstracts/abstracts" as a;
+@use "../base/typography-mixins" as t;
+
+.search {
+  background-color: a.$colors-black;
+}
+
+.searchpage-title {
+  @include t.title;
+  text-align: center;
+}
+
+.searchpage-inner {
+  background-color: a.$colors-white;
+  @include a.layout-wrap-wide;
+}
+
+.searchpage {
+  display: grid;
+  grid-template-columns: 1fr 2fr;
+  grid-template-rows: auto;
+  grid-template-areas:
+          "searchbar searchbar"
+          "side results";
+  grid-gap: 2em;
+}
+
+.searchpage-filters {
+  border-style: solid;
+  border-width: thin;
+  border-color: a.$colors-gray-300;
+
+  h2 {
+    @include t.heading2;
+    text-transform: uppercase;
+    letter-spacing: 3.6px;
+    font-weight: bold;
+    font-size: 18px;
+    font-family: "Avenir Next W01", "serif";
+    color: #4d4e4c;
+  }
+
+  .results-title {
+    text-align: center;
+    letter-spacing: .10em;
+    text-transform: uppercase;
+    color: white;
+    background-color: a.$colors-orange-500;
+    @include a.respond-at('medium') {
+      width: 50%;
+    }
+
+  }
+
+  flex: 1 1 auto;
+}
+
+.ais-RefinementList {
+  .ais-RefinementList-item {
+    text-transform: uppercase;
+    letter-spacing: .1em;
+    padding-left: 1em;
+    line-height: 1.75em;
+  }
+
+  button {
+    font-weight: bold;
+    color: a.$colors-orange-700;
+    padding-left: 1em;
+    letter-spacing: .05em;
+    margin-bottom: 1em;
+  }
+}
+
+//Justin's code
+#searchpage-searchbox {
+  grid-area: searchbar;
+
+  .ais-SearchBox-form {
+    input {
+      font-weight: 800;
+      width: 100%;
+      padding: 1em 1.5em;
+      color: a.$colors-gray-500;
+      border: none;
+      outline: none;
+    }
+
+    border-bottom-style: solid;
+    border-width: thin;
+  }
+}
+
+.ais-Hits-list {
+  display: grid;
+  grid-gap: 1em;
+  padding-bottom: 1em;
+  padding-right: 1em;
+}
+
+.searchpage-hit {
+
+  .searchpage-hit-content {
+    position: relative;
+    overflow: hidden;
+    //@include a.layers-set('overlay-top');
+    @include a.respond-at('large') {
+      display: grid;
+      grid-template-columns: 1fr 3fr;
+      grid-template-areas:
+              "image cats"
+              "image title"
+              "image author"
+              "image excerpt";
+    }
+
+    img {
+      height: 100%;
+      width: 100%;
+      @include a.layout-absolute-cover;
+      @include a.layers-set('overlay-img');
+      object-position: center;
+      object-fit: cover;
+      background-color: a.$colors-black;
+      @include a.respond-at('large') {
+        position: static;
+        grid-area: image;
+      }
+    }
+    .color-overlay {
+      @include a.respond-at('large'){
+        display: none;
+      }
+      @include a.layers-set('overlay');
+      display: inherit;
+    }
+
+    .searchpage-hit-title {
+      position: relative;
+      @include t.title;
+      font-size: 2rem;
+      font-style: italic;
+      color: a.$colors-white;
+      @include a.layers-set('overlay-top');
+      @include a.respond-at('large') {
+        grid-area: title;
+        font-weight: 600;
+        font-size: 18px;
+        letter-spacing: .45px;
+        color: a.$colors-black;
+        padding-left: .5em;
+      }
+    }
+
+    .searchpage-hit-author {
+      position: relative;
+      @include a.layers-set('overlay-top');
+      color: a.$colors-orange-500;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: .2em;
+      font-size: 1rem;
+      line-height: 1.4;
+      padding-bottom: 1.5em;
+      @include a.respond-at('large') {
+        grid-area: author;
+        font-weight: inherit;
+        text-transform: none;
+        letter-spacing: 1.35px;
+        font-size: 18px;
+        font-style: italic;
+        font-family: "Crimson Text", "serif";
+        color: a.$colors-black;
+        padding-left: .5em;
+      }
+    }
+
+    .searchpage-hit-excerpt {
+      position: relative;
+      @include a.layers-set('overlay-top');
+      color: a.$colors-white;
+      font-family: "Crimson Text", "serif";
+      padding-bottom: 1em;
+      @include a.respond-at('large') {
+        grid-area: excerpt;
+        font-weight: 400;
+        font-size: 16px;
+        color: a.$colors-black;
+        padding-left: .5em;
+      }
+    }
+
+    .searchpage-hit-cats {
+      position: relative;
+      @include a.layers-set('overlay-top');
+      .searchpage-hit-cat {
+        background-color: a.$colors-orange-500;
+        color: a.$colors-white;
+        padding: .5em;
+      }
+      @include a.respond-at('large') {
+        grid-area: cats;
+        padding-left: .5em;
+      }
+      margin-bottom: .5em;
+    }
+  }
+}
+

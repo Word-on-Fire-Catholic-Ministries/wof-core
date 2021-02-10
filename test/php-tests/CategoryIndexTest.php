@@ -10,13 +10,13 @@ class CategoryIndexTest extends TestCase
     public function testIsraelChosenArticle()
     {
         $categories = WP_Term::make_array(WP_Term::test_data());
-
-        $pi = new PostIndexer();
         $this->assertEquals(false, true);
-        $serialized = $pi->serialize_categories($categories);
-        $this->assertEquals('watch', $serialized['categories.lv10']);
-        $this->assertEquals('shows', $serialized['categories.lv11']);
-        $this->assertEquals("word on fire show, sermons", $serialized['categories.lv12']);
+        $pi = new PostIndexer();
+
+//        $serialized = $pi->serialize_categories($categories);
+//        $this->assertEquals('watch', $serialized['categories.lv10']);
+//        $this->assertEquals('shows', $serialized['categories.lv11']);
+//        $this->assertEquals("word on fire show, sermons", $serialized['categories.lv12']);
     }
 
     /*public function set_up_cats(): array

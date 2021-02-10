@@ -1,0 +1,63 @@
+@use "../abstracts/layout";
+@use "../abstracts/respond";
+@use "../abstracts/size";
+
+.block-content {
+  $block-margin: size.rem(16);
+
+  & > * {
+    @include layout.wrap-standard;
+  }
+
+  & > h1 {
+    font-size: 2.5em;
+    font-weight: 700;
+  }
+
+  & > h2 {
+    font-size: 1.75em;
+    font-weight: 600;
+  }
+
+  & > h3 {
+    font-size: 1.5em;
+    font-weight: 500;
+  }
+
+  &.allow-wide-blocks {
+    .alignfull,
+    .alignwide {
+      margin-left: 0;
+      margin-right: 0;
+      width: 100%;
+      min-width: 100%;
+    }
+
+    .alignwide {
+      @include respond.at('wrap-wide') {
+        @include layout.wrap-wide;
+        width: layout.$wrap-wide;
+        min-width: auto;
+      }
+    }
+  }
+
+  .wp-block-table {
+    table {
+      border-spacing: 0;
+      border-top: black solid 1px;
+      border-left: black solid 1px;
+    }
+
+    th, td {
+      text-align: left;
+      border-bottom: black solid 1px;
+      border-right: black solid 1px;
+      padding: 0.25rem;
+    }
+
+    th {
+      border-bottom: black solid 3px;
+    }
+  }
+}

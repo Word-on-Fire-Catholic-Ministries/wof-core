@@ -12,11 +12,10 @@
     ],
     "minimum-stability": "stable",
     "autoload": {
-        "psr-4": {"WOF\\": "src"
+        "psr-4": {
+            "WOF\\": "src",
+            "Tests": "test/php-tests"
         },
-        "classmap": [
-            "test/mocks"
-        ]
     },
     "require": {
         "php": "^7.4",

@@ -1,0 +1,139 @@
+@use "../abstracts/layout";
+@use "../abstracts/layers";
+@use "../abstracts/size";
+@use "../base/typography-mixins" as typ;
+@use "../abstracts/respond";
+@use "../abstracts/colors";
+@use "../abstracts/fonts";
+
+.latest-content{
+  margin: 0;
+  background-color: colors.$black;
+  position: relative;
+  width: 100%;
+  min-width: 100%;
+  min-height: 100vh;
+
+
+  &__featured-list {
+    position: relative;
+    margin-bottom: -10vh;
+
+    @include respond.at('large') {
+      margin-bottom: 0;
+      @include layout.absolute-cover;
+    }
+
+  }
+
+  &__featured-item {
+    position: relative;
+    background-color: colors.$black;
+    height: 0;
+    visibility: hidden;
+    opacity: 0;
+    transition: visibility 0.5s, opacity 0.5s linear;
+
+
+
+    &.active {
+      visibility: visible;
+      opacity: 1;
+      min-height: 100vh;
+    }
+  }
+
+  &__author {
+    display: block;
+    font-weight: 700;
+
+    @include respond.at('large') {
+      display: inline;
+    }
+  }
+
+  &__featured-text {
+    @include layout.absolute-cover;
+    @include layers.set('overlay-top');
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    max-width: 100%;
+    padding: 0 2rem;
+
+    @include respond.at('large') {
+      max-width: size.rem(550);
+      margin-left: 15%;
+    }
+
+  }
+
+  &__featured-image {
+    position: relative;
+    margin-left: 0;
+    margin-right: 0;
+    width: 100%;
+    min-width: 100%;
+    height: 100vh;
+    overflow: hidden;
+
+    img {
+      width: 100%;
+      height: 100%;
+      @include layout.absolute-cover;
+      object-fit: cover;
+      object-position: center center;
+    }
+  }
+
+  &__content {
+    position: relative;
+    width: 100%;
+    @include layers.set('overlay-top');
+
+    @include respond.at('large') {
+      margin: 0;
+      position: absolute;
+      bottom: 0;
+      right: 0;
+      max-width: size.rem(400);
+    }
+  }
+
+  &__title {
+    @include typ.heading1;
+    padding: 2rem;
+  }
+
+  &__posts-list {
+    padding-bottom: 1rem;
+
+  }
+
+  &__posts-item {
+    padding: 0.5rem 2rem;
+  }
+
+  &__posts-line {
+    border-top: 2px solid colors.$white;
+    padding-bottom: 2rem;
+    width: size.rem(80);
+
+  }
+
+  &__posts-cat {
+    margin-bottom: 1em;
+  }
+
+  &__posts-title {
+    font-family: fonts.$crimson;
+
+    @include typ.subtitle;
+    font-size: 1.5rem;
+  }
+
+  &__posts-author {
+
+  }
+}

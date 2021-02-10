@@ -1,0 +1,22 @@
+$layers: (
+        'search-overlay-top': 18,
+        'search-overlay': 17,
+        'search-overlay-img': 16,
+        'search-bar': 15,
+        'header-bar': 10,
+        'primary-nav': 9,
+        'overlay-top': 3,
+        'overlay': 2,
+        'overlay-img': 1
+);
+
+@mixin set ($layer) {
+  $raw-query: map-get($layers, $layer);
+
+  @if $raw-query {
+    z-index: $raw-query;
+  } @else {
+    @error 'No value found for `#{$layers}`. '
+         + 'Please make sure it is defined in `$layers` map.';
+  }
+}

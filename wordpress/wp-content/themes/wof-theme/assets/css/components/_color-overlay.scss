@@ -1,0 +1,11 @@
+@use "../abstracts/layout";
+@use "../abstracts/layers";
+
+.color-overlay {
+  @include layout.absolute-cover;
+  @include layers.set('overlay');
+}
+
+.color-overlay-black-fade {
+  background: linear-gradient(0deg, #000 0%, rgba(0,0,0,0.3) 80%);
+}

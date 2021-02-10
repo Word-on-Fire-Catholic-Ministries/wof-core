@@ -1,0 +1,91 @@
+{
+    "key": "group_5ffdf9a18d7dc",
+    "title": "Post Settings",
+    "fields": [
+        {
+            "key": "field_5ffdf9f506421",
+            "label": "Main Tag",
+            "name": "main_tag",
+            "type": "taxonomy",
+            "instructions": "Select a main tag for the post. The main tag will be prioritized during a search.",
+            "required": 1,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "taxonomy": "post_tag",
+            "field_type": "select",
+            "allow_null": 0,
+            "add_term": 1,
+            "save_terms": 1,
+            "load_terms": 1,
+            "return_format": "id",
+            "multiple": 0
+        },
+        {
+            "key": "field_600b400cb0416",
+            "label": "Hide Title",
+            "name": "hide_title",
+            "type": "true_false",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "message": "Hide page or post title?",
+            "default_value": 0,
+            "ui": 1,
+            "ui_on_text": "Hidden",
+            "ui_off_text": "Visible"
+        },
+        {
+            "key": "field_600e3e37737e5",
+            "label": "Do Not Index",
+            "name": "do_not_index",
+            "type": "true_false",
+            "instructions": "Removes this post from internal search and requests search engines to not index.",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "message": "Hide from search?",
+            "default_value": 0,
+            "ui": 1,
+            "ui_on_text": "",
+            "ui_off_text": ""
+        }
+    ],
+    "location": [
+        [
+            {
+                "param": "post_type",
+                "operator": "==",
+                "value": "post"
+            }
+        ],
+        [
+            {
+                "param": "post_type",
+                "operator": "==",
+                "value": "page"
+            }
+        ]
+    ],
+    "menu_order": 0,
+    "position": "side",
+    "style": "default",
+    "label_placement": "top",
+    "instruction_placement": "label",
+    "hide_on_screen": "",
+    "active": true,
+    "description": "",
+    "modified": 1611546625
+}

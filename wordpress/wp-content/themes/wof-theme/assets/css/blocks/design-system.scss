@@ -1,0 +1,13 @@
+@use "../abstracts/colors";
+
+
+.xdebug-var-dump {
+  & > * {
+    box-sizing: border-box;
+  }
+}
+
+.design-system-block {
+  width: 100%;
+  border: colors.$gray-300 solid 4px;
+}

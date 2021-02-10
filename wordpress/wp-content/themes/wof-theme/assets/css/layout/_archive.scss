@@ -1,0 +1,56 @@
+@use "../abstracts/layout";
+@use "../abstracts/respond";
+@use "../abstracts/fonts";
+@use "../abstracts/colors";
+@use "../abstracts/size";
+
+.archive-content {
+  background-color: black;
+
+  @include respond.at('medium') {
+    padding-top: size.rem(88);
+  }
+
+
+  .archive-header {
+    background-color: colors.$orange-500;
+    display: inline-block;
+    color: white;
+    font-size: size.rem(40);
+    padding: size.rem(12);
+    font-weight: 700;
+    text-transform: uppercase;
+
+    text-align: center;
+
+    @include respond.at('medium') {
+      position: relative;
+      top: 40px;
+      text-align: left;
+      padding: size.rem(12) size.rem(46) size.rem(12) 20%;
+    }
+
+    .page-title {
+      padding: 0;
+      @include respond.at('medium') {
+        padding-left: size.rem(46);
+      }
+    }
+  }
+
+  .archive-inner {
+    margin: 0 0 0 size.rem(46);
+    background-color: white;
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-gap: 3rem;
+    padding: 3rem;
+
+    @include respond.at('medium') {
+      padding: 6rem 4rem;
+      margin: 0 0 0 20%;
+      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    }
+  }
+
+}

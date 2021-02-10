@@ -1,0 +1,26 @@
+@use "size";
+
+$wrap-wide: size.rem(1200);
+$wrap-standard: size.rem(900);
+
+@mixin wrap($max-width) {
+  margin-left: auto;
+  margin-right: auto;
+  max-width: $max-width;
+}
+
+@mixin wrap-standard {
+  @include wrap($wrap-standard);
+}
+
+@mixin wrap-wide {
+  @include wrap($wrap-wide);
+}
+
+@mixin absolute-cover {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  left: 0;
+}

@@ -1,0 +1,31 @@
+[
+  {
+    "name": "Articles",
+    "categories.lv10": "Read"
+  },
+  {
+    "name": "Bishop Barron's Sermons",
+    "categories.lv11": "Shows",
+    "categories.lv10": "Watch"
+  },
+  {
+    "name": "Daily Gospel Reflection",
+    "categories.lv11": "Articles",
+    "categories.lv10": "Read"
+  },
+  {
+    "name": "Read"
+  },
+  {
+    "name": "Shows",
+    "categories.lv10": "Watch"
+  },
+  {
+    "name": "Watch"
+  },
+  {
+    "name": "Word on Fire Show",
+    "categories.lv11": "Shows",
+    "categories.lv10": "Watch"
+  }
+]
