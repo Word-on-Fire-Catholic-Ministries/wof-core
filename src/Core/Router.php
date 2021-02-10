@@ -16,20 +16,13 @@ class Router extends Component {
 
 
 	/**
-	 * @var array string array of WP hooks for when to automatically flush the rewrites. Usually when the plugin or theme is deactivated.
-	 */
-	private array $flushRewriteHooks;
-
-	/**
-	 * Create the router component
+	 * Create the router component. NOTE: You are responsible for flush rewrites. This class does not handle it.
 	 *
 	 * @param Hooks $hooks The WP hooks dependency
-	 * @param array $flushRewriteHooks Array of strings of WP hooks when flush rewrite should run.
 	 */
-    public function __construct(Hooks $hooks, array $flushRewriteHooks) {
+    public function __construct(Hooks $hooks) {
         parent::__construct($hooks);
         $this->routes = array();
-	    $this->flushRewriteHooks = $flushRewriteHooks;
     }
 
     /**
@@ -47,13 +40,6 @@ class Router extends Component {
             'param' => $param,
             'callback' => $callback
         ];
-    }
-
-    /**
-     * Flush the rewrites on key hooks
-     */
-    public function flushRewrites() {
-        flush_rewrite_rules();
     }
 
 
@@ -100,12 +86,6 @@ class Router extends Component {
      * @param Hooks $hooks Hooks to register with WP
      */
     protected function defineHooks(Hooks $hooks) {
-        $hooks->add_action('init', $this, 'addRewrites', 11);
-
-        foreach ($this->flushRewriteHooks as $hook) {
-	        $hooks->add_action($hook, $this, 'flushRewrites', 12);
-        }
-
         $hooks->add_action('init', $this, 'addRewrites');
         $hooks->add_filter('query_vars', $this, 'addQueryVars');
         $hooks->add_filter('template_redirect', $this, 'matchRoutes',0);

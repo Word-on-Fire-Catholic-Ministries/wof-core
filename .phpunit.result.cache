@@ -1,0 +1,1 @@
+C:37:"PHPUnit\Runner\DefaultTestResultCache":322:{a:2:{s:7:"defects";a:2:{s:45:"CategoryIndexTesting::testIsraelChosenArticle";i:4;s:66:"WOF\Test\Unit\Search\CategoryIndexTesting::testIsraelChosenArticle";i:4;}s:5:"times";a:2:{s:45:"CategoryIndexTesting::testIsraelChosenArticle";d:0.001;s:66:"WOF\Test\Unit\Search\CategoryIndexTesting::testIsraelChosenArticle";d:0.001;}}}
