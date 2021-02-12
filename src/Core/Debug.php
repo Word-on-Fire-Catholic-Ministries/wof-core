@@ -29,4 +29,34 @@ class Debug {
         echo '</pre>';
     }
 
+    public static function show_queued_sripts() {
+	    if (!is_admin()) {
+		    add_action( 'wp_print_scripts', array(__CLASS__, 'inspect_scripts') );
+	    }
+    }
+
+	public static function inspect_scripts() {
+		global $wp_scripts;
+		Debug::printVar($wp_scripts->queue, 'Scripts');
+	}
+
+    public static function show_queued_styles() {
+	    if (!is_admin()) {
+		    add_action( 'wp_print_styles', array(__CLASS__, 'inspect_styles') );
+	    }
+    }
+
+	public static function inspect_styles() {
+		global $wp_styles;
+		Debug::printVar($wp_styles->queue, 'Style');
+	}
+
+    public static function show_hook_contents(string $hook) {
+	    global $wp_filter;
+
+	    if (isset($wp_filter[$hook])) {
+		    Debug::printVar($wp_filter[$hook], 'HOOK: ' . $hook);
+	    }
+    }
+
 }
