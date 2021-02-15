@@ -1,6 +1,5 @@
 <?php
 namespace WOF\Search;
-use WP_Term;
 
 /*
  * Tree of Categories. Each category holds a reference to it's parent as
@@ -21,7 +20,7 @@ class Category
 
     private int $depth;
 
-    public function __construct(WP_Term $wp_category)
+    public function __construct($wp_category)
     {
         $this->name = $wp_category->name;
         $this->parent_term_id = $wp_category->parent;

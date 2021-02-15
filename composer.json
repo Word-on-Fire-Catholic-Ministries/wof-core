@@ -14,8 +14,9 @@
     "autoload": {
         "psr-4": {
             "WOF\\": "src",
-            "Tests": "test/php-tests"
-        },
+            "WOF\\Org\\Theme\\": "wordpress/wp-content/themes/wof-theme/src",
+            "Mocks\\": "test/mocks"
+        }
     },
     "require": {
         "php": "^7.4",
