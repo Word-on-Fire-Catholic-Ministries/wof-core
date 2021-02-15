@@ -3,6 +3,7 @@
 
 namespace WOF\Taxonomy;
 
+use WOF\Core\Debug;
 use WOF\Search\Category;
 
 defined( 'ABSPATH' ) || exit;
@@ -17,26 +18,46 @@ class CategoryTree {
     /**
      * @var array of Category objects
      */
-    private array $categories;
+    private array $categories = array();
 
     public function __construct( array $terms ) {
         $this->terms = $terms;
 
-        $this->categories = $this->make_tree();
+        $this->make_tree();
         $this->connect_nodes();
         $this->set_category_depths();
     }
 
-    private function make_tree () : array {
-        $categories = array();
+    private function make_tree () : void {
         foreach($this->terms as $term){
             $category = new Category($term);
-            $categories[$category->get_term_id()] = $category;
+            $this->categories[$category->get_term_id()] = $category;
         }
-        return $categories;
+        //add parents to the categories list
+        foreach($this->terms as $term){
+            $this->add_parent_nodes_to_tree($term);
+        }
+    }
+
+    // Adds the parents of a category to a tree
+    private function add_parent_nodes_to_tree($term): void{
+        $parent_id = $term->parent;
+        //base case, top of tree, return
+        if($parent_id === 0){
+            return;
+        }
+        else{
+            $parent_term = get_term($parent_id);
+            $parent_cat = new Category($parent_term);
+            //Debug::printVar($parent_cat);
+            $this->categories[$parent_id] = $parent_cat;
+            //Debug::printVar($this->categories);
+            $this->add_parent_nodes_to_tree($parent_term);
+        }
     }
 
     private function connect_nodes () {
+        //Debug::printVar($this->categories);
         foreach ($this->categories as $cat) {
             if ($cat->get_parent_term_id() === 0) {
                 continue; //top of the tree, no parent

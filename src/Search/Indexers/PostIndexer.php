@@ -3,6 +3,7 @@
 
 namespace WOF\Search\Indexers;
 
+use WOF\Core\Debug;
 use WOF\Search\Indexer;
 use WP_Post;
 
@@ -25,7 +26,8 @@ class PostIndexer extends Indexer {
 
 //		$serialized['categories'] = wp_get_post_categories(
 //			$post->ID, array('fields' => 'names'));
-        $post_cats = wp_get_post_categories($post->ID,array('fields' => array('names', 'parents', 'term_ids')));
+        $post_cats = wp_get_post_categories($post->ID,array('fields' => 'all'));
+        //Debug::printVar($post_cats);
         $serialized_cats = parent::serialize_categories($post_cats);
         $serialized = array_merge($serialized, $serialized_cats);
 
