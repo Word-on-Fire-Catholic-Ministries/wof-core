@@ -34,3 +34,6 @@ wordpress/
 # IDE Specific
 .idea/
 .vscode
+
+#test results
+.phpunit.result.cache
