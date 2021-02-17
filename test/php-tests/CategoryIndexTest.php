@@ -28,7 +28,7 @@ class CategoryIndexTest extends TestCase
     }
 
     public function testSerializePostShouldMySonBeMyFather(){
-        $post = get_post(59); //Israel is Chosen for the World Test
+        $post = get_post(59); //Should my Son be my Father
         $postIndexer = new PostIndexer();
         $serialized = $postIndexer->serializePost($post);
         $this->assertEquals('Read',$serialized['categories.lv10']);
