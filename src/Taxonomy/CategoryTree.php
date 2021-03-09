@@ -4,7 +4,6 @@
 namespace WOF\Taxonomy;
 
 use WOF\Core\Debug;
-use WOF\Search\Category;
 
 defined( 'ABSPATH' ) || exit;
 
@@ -47,13 +46,22 @@ class CategoryTree {
             return;
         }
         else{
-            $parent_term = get_term($parent_id);
+            $parent_term = $this->get_term($parent_id);
             $parent_cat = new Category($parent_term);
             //Debug::printVar($parent_cat);
             $this->categories[$parent_id] = $parent_cat;
             //Debug::printVar($this->categories);
             $this->add_parent_nodes_to_tree($parent_term);
         }
+    }
+
+    private function get_term ($term_id) {
+    	foreach ($this->terms as $term) {
+    		if ($term->term_id === $term_id) {
+    			return $term;
+		    }
+	    }
+    	return null;
     }
 
     private function connect_nodes () {

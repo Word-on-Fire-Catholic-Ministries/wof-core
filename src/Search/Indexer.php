@@ -103,8 +103,9 @@ abstract class Indexer {
 		];
 	}
 
-	public function serialize_categoires ( array $terms ) : array {
-
+	public function serialize_categories ( array $terms ) : array {
+		$cats = new CategoryTree($terms);
+		return $cats->get_category_list();
 	}
 
     public function serialize_hierarchical_categories( array $terms ) : array {

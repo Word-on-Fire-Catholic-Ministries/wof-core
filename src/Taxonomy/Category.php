@@ -1,5 +1,5 @@
 <?php
-namespace WOF\Search;
+namespace WOF\Taxonomy;
 
 /*
  * Tree of Categories. Each category holds a reference to it's parent as
@@ -84,30 +84,5 @@ class Category
         }
         //base case no parent
         return $return_string;
-    }
-
-    public function jsonify(){
-        $rv = array("name" => $this->name);
-
-        if($this->parent_term_id === 0){
-            return ($rv);
-        }
-        else{
-            $temp_depth = $this->parent->get_depth();
-            $temp_parent = $this->parent;
-            while($temp_depth >= 10){
-                //check for last level
-                if($temp_parent->get_parent_term_id() === 0){
-                    $rv['categories.lv'.strval($temp_depth)] = $temp_parent->get_name();
-                    break;
-                }
-                $rv['categories.lv'.strval($temp_depth)] = $temp_parent->get_name();
-//                Debug::print_var($temp_parent);
-//                Debug::print_var($temp_depth);
-                $temp_depth--;
-                $temp_parent = $temp_parent->get_parent();
-            }
-            return ($rv);
-        }
     }
 }
