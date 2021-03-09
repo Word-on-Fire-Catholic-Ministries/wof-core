@@ -112,7 +112,7 @@ abstract class Indexer {
         $json = array();
 
         foreach($cats->get_depth_array() as $depth => $cats){
-            $json['lv'.strval($depth)] = $cats;
+            $json['categories.lv'.strval($depth)] = $cats;
         }
         return $json;
     }
