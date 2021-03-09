@@ -110,10 +110,11 @@ abstract class Indexer {
 
     public function serialize_hierarchical_categories( array $terms ) : array {
         $cats = new CategoryTree($terms);
+        $list = $cats->get_hierarchical_list();
         $json = array();
 
-        foreach($cats->get_depth_array() as $depth => $cats){
-            $json['categories.lv'.strval($depth)] = $cats;
+        foreach($list as $depth => $cat){
+            $json['lvl' . strval($depth)] = $cat;
         }
         return $json;
     }

@@ -53,8 +53,11 @@ class Category
         return $this->term_id;
     }
 
-    public function get_parent(): Category{
-        return $this->parent;
+    public function get_parent(): ?Category {
+    	if (isset($this->parent)) {
+		    return $this->parent;
+	    }
+    	return null;
     }
 
     public function get_parent_term_id(): int
@@ -76,13 +79,15 @@ class Category
         }
     }
 
-    public function get_parent_string_list ($return_string) {
-        $return_string .= $this->name;
-        if($this->parent){
-            $return_string .= ' > ';
-            $return_string .= $this->get_parent_string_list($return_string);
+    public function get_parent_string_list (): string {
+        $return_string = $this->name;
+
+        $current = $this->get_parent();
+        while(isset($current)) {
+	        $return_string .= ' > ' . $current->name;
+        	$current = $current->get_parent();
         }
-        //base case no parent
+
         return $return_string;
     }
 }

@@ -22,14 +22,13 @@ class PostIndexer extends Indexer {
 			$serialized['thumbnail'] = get_the_post_thumbnail_url($post);
 		}
 
-        $serialized['tags'] = parent::serialize_tags(wp_get_post_terms($post->ID, 'post_tag'));
+        $serialized['tags'] = parent::serialize_tags(wp_get_post_terms($post->ID ));
 
-//		$serialized['categories'] = wp_get_post_categories(
-//			$post->ID, array('fields' => 'names'));
         $post_cats = wp_get_post_categories($post->ID,array('fields' => 'all'));
-        //Debug::printVar($post_cats);
-        $serialized_cats = parent::serialize_hierarchical_categories($post_cats);
-        $serialized = array_merge($serialized, $serialized_cats);
+
+        $serialized['hierarchicalCategories'] = parent::serialize_hierarchical_categories($post_cats);
+
+        $serialized['categories'] = parent::serialize_categories($post_cats);
 
 		return $serialized;
 	}

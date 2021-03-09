@@ -116,10 +116,10 @@ class CategoryTree {
         $list = array();
         foreach($this->categories as $cat){
             if(isset($list[$cat->get_depth()])){
-                $list[$cat->get_depth()] = $list[$cat->get_depth()] . ', ' . $cat->get_parent_string_list('');
+                $list[$cat->get_depth()][] = $cat->get_parent_string_list();
             }
             else{
-                $list[$cat->get_depth()] = $cat->get_parent_string_list('');
+                $list[$cat->get_depth()] = array($cat->get_parent_string_list());
             }
         }
         return $list;

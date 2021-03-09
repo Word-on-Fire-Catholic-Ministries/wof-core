@@ -48,7 +48,7 @@ class IndexerTest extends TestCase
 	public function testSerializeHierarchicalCategoriesReturnsArrayInOrder() {
 		$categories = Wofi_Term::make_array(Wofi_Term::test_data());
 		$pi = new PostIndexer();
-		$serialized = $pi->serialize_categories($categories);
+		$serialized = $pi->serialize_hierarchical_categories($categories);
 		$this->assertEquals([
 			'lvl0' => ['read', 'watch'],
 			'lvl1' => ['articles > read', 'shows > watch'],
