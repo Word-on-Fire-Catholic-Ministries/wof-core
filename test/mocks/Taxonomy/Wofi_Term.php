@@ -1,5 +1,5 @@
 <?php
-namespace Mocks;
+namespace WOF\Mocks\Taxonomy;
 class Wofi_Term{
 
     public string $name;
