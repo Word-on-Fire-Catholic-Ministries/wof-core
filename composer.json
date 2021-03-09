@@ -12,7 +12,16 @@
     ],
     "minimum-stability": "stable",
     "autoload": {
-        "psr-4": {"WOF\\": "src"}
+        "psr-4": {
+            "WOF\\": "src",
+            "WOF\\Org\\Theme\\": "wordpress/wp-content/themes/wof-theme/src"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "WOF\\Tests\\": "test/php-tests/",
+            "WOF\\Mocks\\": "test/mocks"
+        }
     },
     "require": {
         "php": "^7.4",

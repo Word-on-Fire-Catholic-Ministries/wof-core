@@ -3,9 +3,9 @@
 
 namespace WOF\Search\Indexers;
 
+use WOF\Core\Debug;
 use WOF\Search\Indexer;
 use WP_Post;
-use WP_Term;
 
 defined( 'ABSPATH' ) || exit;
 
@@ -22,12 +22,13 @@ class PostIndexer extends Indexer {
 			$serialized['thumbnail'] = get_the_post_thumbnail_url($post);
 		}
 
-		$serialized['tags'] = array_map(function (WP_Term $term) {
-			return $term->name;
-		}, wp_get_post_terms($post->ID, 'post_tag'));
+        $serialized['tags'] = parent::serialize_tags(wp_get_post_terms($post->ID ));
 
-		$serialized['categories'] = wp_get_post_categories(
-			$post->ID, array('fields' => 'names'));
+        $post_cats = wp_get_post_categories($post->ID,array('fields' => 'all'));
+
+        $serialized['hierarchicalCategories'] = parent::serialize_hierarchical_categories($post_cats);
+
+        $serialized['categories'] = parent::serialize_categories($post_cats);
 
 		return $serialized;
 	}
