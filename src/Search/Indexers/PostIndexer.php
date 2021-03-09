@@ -28,7 +28,7 @@ class PostIndexer extends Indexer {
 //			$post->ID, array('fields' => 'names'));
         $post_cats = wp_get_post_categories($post->ID,array('fields' => 'all'));
         //Debug::printVar($post_cats);
-        $serialized_cats = parent::serialize_categories($post_cats);
+        $serialized_cats = parent::serialize_hierarchical_categories($post_cats);
         $serialized = array_merge($serialized, $serialized_cats);
 
 		return $serialized;

@@ -37,3 +37,4 @@ wordpress/
 
 #test results
 .phpunit.result.cache
+/wordpress/
