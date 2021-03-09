@@ -67,8 +67,8 @@ class Category
     {
         //Base case, no parent, default depth of 10 for Algolia
         if ($this->parent_term_id === 0) {
-            $this->depth = 10;
-            return 10;
+            $this->depth = 0;
+            return 0;
         } //Recurse
         else {
             $this->depth = $this->parent->set_depth() + 1;
