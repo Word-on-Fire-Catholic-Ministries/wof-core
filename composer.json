@@ -1,7 +1,7 @@
 {
     "name": "word-on-fire/wof-core",
     "description": "A collection of libraries, tools, and shared functionality across WOF WordPress sites",
-    "version": "1.0.3",
+    "version": "1.0.4",
     "type": "library",
     "license": "MIT",
     "authors": [
