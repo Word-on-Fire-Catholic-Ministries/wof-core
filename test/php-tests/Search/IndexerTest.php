@@ -29,11 +29,11 @@ class IndexerTest extends TestCase
 	    $pi = new PostIndexer();
 	    $serialized = $pi->serialize_categories($categories);
 	    $this->assertIsArray($serialized);
-	    $this->assertEquals(['look', 'watch', 'articles', 'shows', 'daily gospel reflections', 'word on fire show', 'sermons'], $serialized);
+	    $this->assertEquals(['read', 'watch', 'articles', 'shows', 'daily gospel reflections', 'word on fire show', 'sermons'], $serialized);
     }
 
-    public function testSerializeHierarchicalCategoriesReturnsCorrectFormat() {
-
-    }
+//    public function testSerializeHierarchicalCategoriesReturnsCorrectFormat() {
+//
+//    }
 }
 

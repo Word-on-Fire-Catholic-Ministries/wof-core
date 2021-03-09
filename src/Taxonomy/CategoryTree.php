@@ -89,13 +89,13 @@ class CategoryTree {
      * given a list of categories associated with a post
      */
     public function get_depth_array(): array{
-        $depths = array(); // [depth (int) => "cat, cat, cat"]
+        $depths = array(); // [depth (int) => [cat, cat, cat]
         foreach($this->categories as $cat){
             if(isset($depths[$cat->get_depth()])){
-                $depths[$cat->get_depth()] = $depths[$cat->get_depth()].', '.$cat->get_name();
+                $depths[$cat->get_depth()][]  = $cat->get_name();
             }
             else{
-                $depths[$cat->get_depth()] = $cat->get_name();
+                $depths[$cat->get_depth()] = array($cat->get_name());
             }
         }
         return $depths;
@@ -104,8 +104,10 @@ class CategoryTree {
     public function get_category_list(): array {
         $list = array();
         $depth_array = $this->get_depth_array();
-        foreach($depth_array as $depth => $name){
-            $list[] = $name;
+        foreach($depth_array as $depth => $names){
+            foreach($names as $name){
+                $list[] = $name;
+            }
         }
         return $list;
     }
