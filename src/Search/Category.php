@@ -76,6 +76,16 @@ class Category
         }
     }
 
+    public function get_parent_string_list ($return_string) {
+        $return_string .= $this->name;
+        if($this->parent){
+            $return_string .= ' > ';
+            $return_string .= $this->get_parent_string_list($return_string);
+        }
+        //base case no parent
+        return $return_string;
+    }
+
     public function jsonify(){
         $rv = array("name" => $this->name);
 

@@ -92,4 +92,26 @@ class CategoryTree {
         }
         return $depths;
     }
+
+    public function get_category_list(): array {
+        $list = array();
+        $depth_array = $this->get_depth_array();
+        foreach($depth_array as $depth => $name){
+            $list[] = $name;
+        }
+        return $list;
+    }
+
+    public function get_hierarchical_list(): array {
+        $list = array();
+        foreach($this->categories as $cat){
+            if(isset($list[$cat->get_depth()])){
+                $list[$cat->get_depth()] = $list[$cat->get_depth()] . ', ' . $cat->get_parent_string_list('');
+            }
+            else{
+                $list[$cat->get_depth()] = $cat->get_parent_string_list('');
+            }
+        }
+        return $list;
+    }
 }
