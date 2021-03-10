@@ -6,6 +6,7 @@ namespace WOF\Search;
 
 use Algolia\AlgoliaSearch\SearchIndex;
 use Exception;
+use WOF\Core\Debug;
 use WOF\Taxonomy\CategoryTree;
 use WP_Post;
 use WP_Query;
