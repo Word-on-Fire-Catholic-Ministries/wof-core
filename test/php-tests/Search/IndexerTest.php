@@ -4,6 +4,7 @@ namespace WOF\Tests\Search;
 
 use WOF\Mocks\Taxonomy\Wofi_Term;
 use PHPUnit\Framework\TestCase;
+use WOF\Search\Index;
 use WOF\Search\Indexers\PostIndexer;
 
 class IndexerTest extends TestCase
@@ -59,5 +60,7 @@ class IndexerTest extends TestCase
 				]
 			], $serialized);
 	}
+
+
 }
 

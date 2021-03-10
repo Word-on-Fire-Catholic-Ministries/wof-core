@@ -5,6 +5,7 @@ namespace WOF\Search\Indexers;
 
 use WOF\Core\Debug;
 use WOF\Search\Indexer;
+use WOF\Taxonomy\Categories;
 use WP_Post;
 
 defined( 'ABSPATH' ) || exit;
@@ -24,7 +25,7 @@ class PostIndexer extends Indexer {
 
         $serialized['tags'] = parent::serialize_tags(wp_get_post_terms($post->ID ));
 
-        $post_cats = wp_get_post_categories($post->ID,array('fields' => 'all'));
+        $post_cats = Categories::get_all_for_post($post->ID);
 
         $serialized['hierarchicalCategories'] = parent::serialize_hierarchical_categories($post_cats);
 
