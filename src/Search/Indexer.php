@@ -19,6 +19,7 @@ abstract class Indexer {
 	protected $postType = 'post';
 	protected $indexType = 'content';
 	protected $idPrefix = 'nil';
+	protected $siteName = 'wordonfire';
 
 	public function getPostType () : string {
 		return $this->postType;
@@ -35,6 +36,10 @@ abstract class Indexer {
 	public function setIdPrefix (string $prefix) {
 		$this->idPrefix = $prefix;
 	}
+
+	public function setSiteName (string $siteName) {
+	    $this->siteName = $siteName;
+    }
 
 	public function indexAll (SearchIndex $index, int $batchSize = 100) : int {
 
@@ -92,7 +97,7 @@ abstract class Indexer {
 			'objectID' => "{$this->idPrefix}_{$post->post_type}#{$post->ID}",
 			'title' => $post->post_title,
 			'published' => $post->post_date,
-			'site' => $this->idPrefix,
+			'site' => $this->siteName,
 			'author' => [
 				'id' => $post->post_author,
 				'name' => get_user_by('ID', $post->post_author)->display_name,
