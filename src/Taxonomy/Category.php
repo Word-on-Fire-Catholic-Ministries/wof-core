@@ -80,14 +80,16 @@ class Category
     }
 
     public function get_parent_string_list (): string {
-        $return_string = $this->name;
+	    $hierarchy = array();
 
-        $current = $this->get_parent();
-        while(isset($current)) {
-	        $return_string .= ' > ' . $current->name;
-        	$current = $current->get_parent();
-        }
+	    $current = $this;
+	    while(isset($current)) {
+		    $hierarchy[] = $current->name;
+		    $current = $current->get_parent();
+	    }
 
-        return $return_string;
+	    $hierarchy = array_reverse($hierarchy);
+
+	    return implode(' > ', $hierarchy);
     }
 }
