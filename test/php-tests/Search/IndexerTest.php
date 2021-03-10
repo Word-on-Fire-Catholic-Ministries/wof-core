@@ -4,6 +4,7 @@ namespace WOF\Tests\Search;
 
 use WOF\Mocks\Taxonomy\Wofi_Term;
 use PHPUnit\Framework\TestCase;
+use WOF\Search\Index;
 use WOF\Search\Indexers\PostIndexer;
 
 class IndexerTest extends TestCase
@@ -59,5 +60,36 @@ class IndexerTest extends TestCase
 				]
 			], $serialized);
 	}
+
+	public function testGetAllPostCategoriesSonFatherArraySize() {
+        $postIndexer = new PostIndexer();
+        //Should my son be my father
+        $categories = $postIndexer->get_entire_list_of_post_categories(59);
+        $this->assertEquals(2, sizeof($categories));
+    }
+
+    public function testGetAllPostCategoriesSonFatherProperList() {
+        $postIndexer = new PostIndexer();
+        // should my son be my father
+        $categories = $postIndexer->get_entire_list_of_post_categories(59);
+        $this->assertEquals('Read', $categories[2]->name);
+        $this->assertEquals('Articles', $categories[5]->name);
+    }
+
+    public function testGetAllPostCategoriesRockStarArraySize() {
+        $postIndexer = new PostIndexer();
+        //When a Christian Rock star stops...
+        $categories = $postIndexer->get_entire_list_of_post_categories(45);
+        $this->assertEquals(3, sizeof($categories));
+    }
+
+    public function testGetAllPostCategoriesRockStarProperList() {
+        $postIndexer = new PostIndexer();
+        // When a Christian Rock Start stops...
+        $categories = $postIndexer->get_entire_list_of_post_categories(45);
+        $this->assertEquals('Word on Fire Show', $categories[11]->name);
+        $this->assertEquals('Shows', $categories[8]->name);
+        $this->assertEquals('Watch', $categories[4]->name);
+    }
 }
 

@@ -24,7 +24,7 @@ class PostIndexer extends Indexer {
 
         $serialized['tags'] = parent::serialize_tags(wp_get_post_terms($post->ID ));
 
-        $post_cats = wp_get_post_categories($post->ID,array('fields' => 'all'));
+        $post_cats = parent::get_entire_list_of_post_categories($post->ID);
 
         $serialized['hierarchicalCategories'] = parent::serialize_hierarchical_categories($post_cats);
 
