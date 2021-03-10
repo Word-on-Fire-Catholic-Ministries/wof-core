@@ -22,12 +22,15 @@ class Index {
 
 	private $idPrefix;
 
-	public function __construct(string $type, string $name, SearchClient $client, string $idPrefix) {
+	private $siteName;
+
+	public function __construct(string $type, string $name, SearchClient $client, string $idPrefix, string $siteName) {
 		$this->indexers = array();
 		$this->type = $type;
 		$this->name = $name;
 		$this->client = $client;
 		$this->idPrefix = $idPrefix;
+		$this->siteName = $siteName;
 		add_action('save_post', array($this, 'on_save_post'), 100, 3);
 	}
 
@@ -56,6 +59,7 @@ class Index {
 	public function addIndexer (Indexer $indexer) {
 		$indexer->setIndexType($this->type);
 		$indexer->setIdPrefix($this->idPrefix);
+		$indexer->setSiteName(($this->siteName));
 		$this->indexers[$indexer->getPostType()] = $indexer;
 	}
 
